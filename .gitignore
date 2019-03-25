@@ -1,0 +1,13 @@
+frontend/node_modules/**/*
+frontend/.expo/*
+frontend/npm-debug.*
+frontend/*.jks
+frontend/*.p12
+frontend/*.key
+frontend/*.mobileprovision
+
+backend/target/
+backend/.mvn/
+backend/.settings/
+backend/.classpath
+backend/.project
