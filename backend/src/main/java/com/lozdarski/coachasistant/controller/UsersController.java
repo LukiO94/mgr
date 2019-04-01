@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lozdarski.coachasistant.entity.RolesEntity;
@@ -20,7 +19,7 @@ import com.lozdarski.coachasistant.repository.UserRepository;
 
 @RequestMapping("/users")
 @RestController
-public class MainController {
+public class UsersController {
 	
 	@Autowired
 	UserRepository userRepository;
@@ -39,7 +38,6 @@ public class MainController {
 
 		
 		int userWithUserNameAndEmail = 0;
-		
 		userWithUserNameAndEmail += userRepository.findUsersByUsername(user.getUserName()).size();
 		userWithUserNameAndEmail += userRepository.findUsersByEmail(user.getEmail()).size();
 		

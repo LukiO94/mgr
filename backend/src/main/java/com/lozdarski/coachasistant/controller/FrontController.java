@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/view")
 @Controller
 public class FrontController {
-
+	
 	@RequestMapping("/")
 	public String homePage() {
 		
