@@ -11,4 +11,7 @@ public interface UserGroupRepository extends CrudRepository<UserGroupEntity, Int
 	
 	@Query(value = "SELECT u FROM UserGroupEntity u WHERE id=?1")
 	List<UserGroupEntity> findByUserGroupId(int userGroupId);
+	
+	@Query(value = "SELECT ug FROM UserGroupEntity ug WHERE isActive=true AND dateTo=null AND playerId=?1")
+	List<UserGroupEntity> findActiveUserGroup(int userId);
 }

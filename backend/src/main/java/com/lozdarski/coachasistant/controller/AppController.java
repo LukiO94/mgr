@@ -1,11 +1,14 @@
 package com.lozdarski.coachasistant.controller;
 
 
+import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -144,6 +147,15 @@ public class AppController {
 		response.put("status", "success");
 		response.put("message", "training added successfully");
 		return response.toString();
+	}
+	
+	@GetMapping(path = "/getUserTrainings", produces = "application/json")
+	public @ResponseBody Iterable<TrainingEntity> getUserTrainings(Principal principal) {
+		
+		UserEntity user = userRepository.findUsersByUsername(principal.getName()).get(0);
+		UserGroupEntity userGroupEntity = userGroupRepository.findActiveUserGroup(user.getId()).get(0);
+		List<TrainingEntity> trainings = trainingRepository.findByGroupId(userGroupEntity.getGroupId());
+		return trainings;
 	}
 	
 	/*
