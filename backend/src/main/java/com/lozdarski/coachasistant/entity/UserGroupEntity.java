@@ -21,6 +21,8 @@ public class UserGroupEntity {
 	private Date dateFrom;
 	private Date dateTo;
 	private boolean isActive;
+	private boolean isActivePlayer;
+	private boolean isActiveCoach;
 	private int playerId;
 	private int groupId;
 	
@@ -70,4 +72,19 @@ public class UserGroupEntity {
 		return id;
 	}
 
+	public boolean isActivePlayer() {
+		return isActivePlayer;
+	}
+
+	public void setActivePlayer(boolean isActivePlayer) {
+		this.isActivePlayer = isActivePlayer;
+	}
+
+	public boolean isActiveCoach() {
+		return isActiveCoach;
+	}
+
+	public void setActiveCoach(boolean isActiveCoach) {
+		this.isActiveCoach = isActiveCoach;
+	}
 }

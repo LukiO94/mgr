@@ -17,9 +17,11 @@ public class TrainingEntity {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="training_id_seq")
 	@SequenceGenerator(name="training_id_seq", sequenceName="training_id_seq", schema="myschema")
 	private int id;
-	
 	private Date date;
+	private String title;
 	private String content;
+	
+	private int playerId;
 	private int groupId;
 	
 	public TrainingEntity() {}
@@ -45,5 +47,20 @@ public class TrainingEntity {
 	public int getId() {
 		return id;
 	}
-	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
 }
