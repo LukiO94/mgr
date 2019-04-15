@@ -17,6 +17,12 @@ export default StyleSheet.create({
         fontSize: 24,
         color: '#000000'
     },
+    outputTextError: {
+        padding: 10,
+        textAlign: 'center',
+        fontSize: 24,
+        color: '#FF0000'
+    },
     elemContainer: {
         padding: 10
     },
@@ -26,6 +32,11 @@ export default StyleSheet.create({
     inputText: {
         padding: 10,
         height: 40,
+        borderColor: 'gray',
+        borderWidth: 1
+    },
+    inputTextMultiline: {
+        padding: 10,
         borderColor: 'gray',
         borderWidth: 1
     }

@@ -7,6 +7,7 @@ frontend/*.jks
 frontend/*.p12
 frontend/*.key
 frontend/*.mobileprovision
+frontend/android/**
 
 backend/target/
 backend/.mvn/

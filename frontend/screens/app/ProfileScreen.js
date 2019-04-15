@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Text, View, StyleSheet } from 'react-native';
-import styles from '../styles/Styles'
+import styles from '../../styles/Styles'
 
 export default class ProfileScreen extends React.Component {
 

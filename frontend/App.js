@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import Form from 'react-native-form'
+import { View, Button } from 'react-native';
+
 import AppNavigator from './navigation/AppNavigator';
+import LoginNavigator from './navigation/LoginNavigator';
 import { AppLoading } from 'expo';
 import styles from './styles/Styles'
 
@@ -13,8 +14,7 @@ export default class FirstApp extends React.Component {
         this.state = {
             isLoadingComplete: false,
             isLoggedIn: false,
-            username: '',
-            password: '',
+            userName: '',
             token: ''
         };
     }
@@ -32,35 +32,21 @@ export default class FirstApp extends React.Component {
             if (this.state.isLoggedIn) {
                 return (
                     <View style={styles.appContainer}>
-                        <AppNavigator screenProps={{ token: this.state.token, username: this.state.username }} />
-                        <View style={styles.elemContainer}>
-                            <Button color={styles.defaultButton.color} onPress={this._handleLoggOut} title="Log out" />
-                        </View>
+                        <AppNavigator screenProps={{ token: this.state.token, userName: this.state.userName, handleLogout: this._handleLogout }} />
                     </View>
                 );
             }
             else {
                 return (
                     <View style={styles.appContainer}>
-                        <Text style={styles.outputText} ref="exampleText">JOŁ</Text>
-                        <View style={styles.elemContainer}>
-                            <TextInput type="TextInput" name="username" style={styles.inputText} placeholder="email" onChangeText={(username) => this.setState({ username })} keyboardType="email-address" />
-                        </View>
-                        <View style={styles.elemContainer}>
-                            <TextInput type="TextInput" name="password" style={styles.inputText} placeholder="password" secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
-                        </View>
-                        <View style={styles.elemContainer}>
-                            <Button color={styles.defaultButton.color} onPress={this._handleLoggIn} title="Log in" />
-                        </View>
+                        <LoginNavigator screenProps={{ token: this.state.token, userName: this.state.userName, handleLogin: this._handleLogin }} />
                     </View>
                 );
             }
-
         }
     }
     _loadResourcesAsync = async () => {
-        return Promise.all([
-        ]);
+        return Promise.all([]);
     };
     _handleLoadingError = error => {
         console.warn(error);
@@ -68,32 +54,19 @@ export default class FirstApp extends React.Component {
     _handleFinishLoading = () => {
         this.setState({ isLoadingComplete: true });
     };
-    _handleLoggIn = () => {
-        let username = this.state.username;
-        let password = this.state.password;
-        fetch('https://ozdar-app.herokuapp.com/login', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            }),
-        })
-            .then((response) => response.json())
-            .then((responseJSON) => {
-                console.log(responseJSON);
-                this.setState({
-                    token: responseJSON.token,
-                    isLoggedIn: true
-                })
-
-            });
+    _handleLogin = (token, userName) => {
+        this.setState({ 
+            isLoggedIn: true,
+            token: token,
+            userName: userName
+        });
     };
-    _handleLoggOut = () => {
-        this.setState({ isLoggedIn: false });
+    _handleLogout = () => {
+        this.setState({
+            isLoggedIn: false,
+            userName: '',
+            token: ''
+        });
     };
 }
 
