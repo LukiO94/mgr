@@ -5,27 +5,42 @@ import BasicScreen from './BasicScreen';
 
 
 export default class PlayerTrainingsScreen extends BasicScreen {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            trainings: []
+        };
+    }
     _specificView = () => {
         const { navigate } = this.props.navigation;
-        return (
-            <View style={styles.mainContainer}>
-                <View style={styles.elemContainer}>
-                    <Button color={styles.defaultButton.color} onPress={() => navigate('PlayerTraining')} title="Siła - 01.04.2019" />
-                </View>
-                <View style={styles.elemContainer}>
-                    <Button color={styles.defaultButton.color} onPress={() => navigate('PlayerTraining')} title="Szybkość - 02.04.2019" />
-                </View>
-                <View style={styles.elemContainer}>
-                    <Button color={styles.defaultButton.color} onPress={() => navigate('PlayerTraining')} title="Tempo - 03.04.2019" />
-                </View>
-                <View style={styles.elemContainer}>
-                    <Button color={styles.defaultButton.color} onPress={() => navigate('PlayerTraining')} title="Wytrzymałość szybkościowa - 04.07.2019" />
-                </View>
-                <View style={styles.elemContainer}>
-                    <Button color={styles.defaultButton.color} onPress={() => navigate('PlayerTraining')} title="Siła - 05.04.2019" />
-                </View>
+        const trainings = this.state.trainings.map((elem) =>
+            <View key={elem.id} style={styles.elemContainer}>
+                <Button color={styles.defaultButton.color} title={elem.title + " - " + elem.date} onPress={() => navigate('PlayerTraining', {training: elem})} />
             </View>
         );
+        return (
+            <View style={styles.mainContainer}>
+                {trainings}
+            </View>
+        );
+    };
+    componentWillMount() {
+        fetch('https://ozdar-test-app.herokuapp.com/trainings/getPlayerTrainings', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + this.props.screenProps.token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJSON) => {
+                console.log(responseJSON);
+                if (responseJSON.status === 200) {
+                    this.setState({
+                        trainings: responseJSON.trainings
+                    });
+                }
+            });
     };
 }

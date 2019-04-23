@@ -17,7 +17,7 @@ export default class TrainingGroupsScreen extends BasicScreen {
         const { navigate } = this.props.navigation;
         const groups = this.state.groups.map((elem) =>
             <View style={styles.elemContainer} key={elem.id}>
-                <Button color={styles.defaultButton.color} onPress={() => navigate('CoachGroup')} title={elem.name} />
+                <Button color={styles.defaultButton.color} onPress={() => navigate('CoachGroup', {groupId: elem.id})} title={elem.name} />
             </View>
         );
         return (

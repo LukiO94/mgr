@@ -39,5 +39,9 @@ export default StyleSheet.create({
         padding: 10,
         borderColor: 'gray',
         borderWidth: 1
+    },
+    pickerInput: { 
+        height: 50, 
+        width: 300 
     }
 });
